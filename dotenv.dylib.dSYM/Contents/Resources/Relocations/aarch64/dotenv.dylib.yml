@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/asmith/code/contributing/tree-sitter-dotenv/dotenv.dylib'
+relocations:     []
+...

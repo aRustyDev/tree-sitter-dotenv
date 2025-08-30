@@ -3,15 +3,28 @@ const NEWLINE = /\r?\n/;
 module.exports = grammar({
   name: "env",
 
-  extras: ($) => [$.comment, /\s/],
+  extras: ($) => [/[ \t]/],
 
   rules: {
-    source_file: ($) => repeat(choice($.comment, $.variable)),
+    source_file: ($) => repeat($._line),
+
+    _line: ($) => choice(
+      $.comment,
+      $.variable,
+      /\r?\n/
+    ),
 
     comment: ($) => token(seq("#", /.*/)),
 
     variable: ($) =>
-      seq(field("name", $.identifier), "=", optional(field("value", $.value))),
+      seq(
+        field("name", $.identifier), 
+        token.immediate("="), 
+        field("value", optional(alias(token.immediate(/[^\n\r]*/), $.value)))
+      ),
+    
+    value: ($) => alias($.raw_value, $.raw_value),
+
 
     interpolated_variable: ($) =>
       choice(
@@ -28,15 +41,6 @@ module.exports = grammar({
       seq('@', /[a-zA-Z0-9_-]+/, ':', /[a-zA-Z0-9_-]+/)
     ),
 
-    value: ($) =>
-      choice(
-        $.string_interpolated,
-        $.string_literal,
-        $.url,
-        $.bool,
-        $.integer,
-        $.raw_value,
-      ),
 
     bool: ($) => choice("true", "false"),
 
@@ -63,6 +67,6 @@ module.exports = grammar({
         ),
       ),
 
-    raw_value: ($) => token(prec(-1, /[^#=\n]+/)),
+    raw_value: ($) => token.immediate(prec(-1, /[^\n\r]+/)),
   },
 });

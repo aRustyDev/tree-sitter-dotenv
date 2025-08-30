@@ -1,0 +1,16 @@
+==================
+Hyphenated keys
+==================
+
+simple-key=value
+auto-install-peers=true
+
+---
+
+(source_file
+  (variable
+    name: (identifier)
+    value: (value (raw_value)))
+  (variable
+    name: (identifier)
+    value: (value (bool))))

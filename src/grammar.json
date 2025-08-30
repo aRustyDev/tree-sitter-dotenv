@@ -4,18 +4,26 @@
     "source_file": {
       "type": "REPEAT",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "comment"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "variable"
-          }
-        ]
+        "type": "SYMBOL",
+        "name": "_line"
       }
+    },
+    "_line": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\r?\\n"
+        }
+      ]
     },
     "comment": {
       "type": "TOKEN",
@@ -45,26 +53,46 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "="
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "="
+          }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "value",
-              "content": {
-                "type": "SYMBOL",
-                "name": "value"
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^\\n\\r]*"
+                  }
+                },
+                "named": true,
+                "value": "value"
+              },
+              {
+                "type": "BLANK"
               }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+            ]
+          }
         }
       ]
+    },
+    "value": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "raw_value"
+      },
+      "named": true,
+      "value": "raw_value"
     },
     "interpolated_variable": {
       "type": "CHOICE",
@@ -174,35 +202,6 @@
               "value": "[a-zA-Z0-9_-]+"
             }
           ]
-        }
-      ]
-    },
-    "value": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "string_interpolated"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "url"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "bool"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "integer"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "raw_value"
         }
       ]
     },
@@ -390,25 +389,21 @@
       }
     },
     "raw_value": {
-      "type": "TOKEN",
+      "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PREC",
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^#=\\n]+"
+          "value": "[^\\n\\r]+"
         }
       }
     }
   },
   "extras": [
     {
-      "type": "SYMBOL",
-      "name": "comment"
-    },
-    {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[ \\t]"
     }
   ],
   "conflicts": [],

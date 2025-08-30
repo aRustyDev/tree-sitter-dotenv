@@ -1,0 +1,1 @@
+; Empty locals.scm - no local definitions needed for env files

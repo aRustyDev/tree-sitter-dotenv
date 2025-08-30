@@ -23,7 +23,7 @@ module.exports = grammar({
 
     shell_command: ($) => /[^$()]+/,
 
-    identifier: ($) => /[A-Z_][0-9a-zA-Z_]*/,
+    identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_-]*/,
 
     value: ($) =>
       choice(

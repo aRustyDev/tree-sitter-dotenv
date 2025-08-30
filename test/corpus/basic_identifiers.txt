@@ -1,0 +1,57 @@
+================================================================================
+Basic identifiers without hyphens
+================================================================================
+
+SIMPLE=value
+lower_case=value
+MixedCase=value
+_UNDERSCORE=value
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable
+    (identifier)
+    (value
+      (raw_value)))
+  (variable
+    (identifier)
+    (value
+      (raw_value)))
+  (variable
+    (identifier)
+    (value
+      (raw_value)))
+  (variable
+    (identifier)
+    (value
+      (raw_value))))
+
+================================================================================
+Hyphenated identifiers
+================================================================================
+
+auto-install-peers=true
+strict-peer-dependencies=false
+package-import-method=clone-or-copy
+my-custom-var=test
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable
+    (identifier)
+    (value
+      (bool)))
+  (variable
+    (identifier)
+    (value
+      (bool)))
+  (variable
+    (identifier)
+    (value
+      (raw_value)))
+  (variable
+    (identifier)
+    (value
+      (raw_value))))

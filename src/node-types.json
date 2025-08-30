@@ -5,6 +5,11 @@
     "fields": {}
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "interpolated_variable",
     "named": true,
     "fields": {},
@@ -162,11 +167,19 @@
     "named": false
   },
   {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": ":-",
     "named": false
   },
   {
     "type": "=",
+    "named": false
+  },
+  {
+    "type": "@",
     "named": false
   },
   {
@@ -180,10 +193,6 @@
   {
     "type": "false",
     "named": false
-  },
-  {
-    "type": "identifier",
-    "named": true
   },
   {
     "type": "integer",

@@ -1,0 +1,52 @@
+================================================================================
+Namespace identifiers with @ syntax
+================================================================================
+
+@mycompany:registry=https://npm.company.com
+@babel:registry=https://registry.npmjs.org
+@scope:always-auth=true
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable
+    (identifier)
+    (value
+      (url)))
+  (variable
+    (identifier)
+    (value
+      (url)))
+  (variable
+    (identifier)
+    (value
+      (bool))))
+
+================================================================================
+Mixed namespace and regular identifiers
+================================================================================
+
+registry=https://registry.npmjs.org
+@mycompany:registry=https://npm.company.com
+auto-install-peers=true
+@babel:always-auth=false
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable
+    (identifier)
+    (value
+      (url)))
+  (variable
+    (identifier)
+    (value
+      (url)))
+  (variable
+    (identifier)
+    (value
+      (bool)))
+  (variable
+    (identifier)
+    (value
+      (bool))))

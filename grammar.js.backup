@@ -18,18 +18,12 @@ module.exports = grammar({
 
     variable: ($) =>
       seq(
-        field("name", $.identifier),
-        optional($._spacing),  // Allow "key = value"
-        "=",
-        optional($._spacing),  // Allow "key= value" or "key = value"
-        field("value", optional($._value))
+        field("name", $.identifier), 
+        token.immediate("="), 
+        field("value", optional(alias(token.immediate(/[^\n\r]*/), $.value)))
       ),
     
-    // Hidden rule for optional spacing
-    _spacing: ($) => /[ \t]*/,
-    
-    // Placeholder for value types - will be expanded in Phase 2+
-    _value: ($) => alias(token.immediate(/[^\n\r]*/), $.raw_value),
+    value: ($) => alias($.raw_value, $.raw_value),
 
 
     interpolated_variable: ($) =>

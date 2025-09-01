@@ -61,7 +61,7 @@
         "required": false,
         "types": [
           {
-            "type": "value",
+            "type": "raw_value",
             "named": true
           }
         ]
@@ -131,10 +131,6 @@
   {
     "type": "true",
     "named": false
-  },
-  {
-    "type": "value",
-    "named": true
   },
   {
     "type": "}",

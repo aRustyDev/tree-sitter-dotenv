@@ -1,0 +1,42 @@
+==================
+simple assignment
+==================
+key=value
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (value)))
+
+==================
+empty value
+==================
+key=
+---
+(source_file
+  (variable
+    name: (identifier)))
+
+==================
+assignment with spaces
+==================
+key = value
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (value)))
+
+==================
+multiple variables
+==================
+KEY1=value1
+KEY2=value2
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (value))
+  (variable
+    name: (identifier)
+    value: (value)))

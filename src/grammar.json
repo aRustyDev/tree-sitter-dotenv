@@ -121,7 +121,7 @@
     },
     "raw_value": {
       "type": "PATTERN",
-      "value": "[^\"\\'\\n\\r][^\\n\\r]*"
+      "value": "[^\"'\\n\\r][^\\n\\r]*"
     },
     "string_double": {
       "type": "SEQ",
@@ -166,17 +166,8 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "escape_sequence"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^'\\\\\\\\]+"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "[^']+"
           }
         },
         {

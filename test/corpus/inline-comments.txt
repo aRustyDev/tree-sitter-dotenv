@@ -1,0 +1,58 @@
+==================
+inline comment after value
+==================
+KEY=value # this is a comment
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value))
+  (comment))
+
+==================
+inline comment with spacing
+==================
+KEY=value   # comment with spacing
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value))
+  (comment))
+
+==================
+inline comment after string
+==================
+KEY="quoted value" # comment after string
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double))
+  (comment))
+
+==================
+inline comment after empty value
+==================
+EMPTY= # empty value
+---
+(source_file
+  (variable
+    name: (identifier))
+  (comment))
+
+==================
+multiple variables with inline comments
+==================
+KEY1=value1 # first comment
+KEY2=value2 # second comment
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value))
+  (comment)
+  (variable
+    name: (identifier)
+    value: (raw_value))
+  (comment))

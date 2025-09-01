@@ -14,7 +14,7 @@ module.exports = grammar({
       /\r?\n/
     ),
 
-    comment: ($) => token(seq("#", /.*/)),
+    comment: ($) => token(prec(1, seq("#", /.*/))),
 
     variable: ($) =>
       seq(
@@ -36,7 +36,7 @@ module.exports = grammar({
     ),
     
     // Raw value captures anything else (lowest precedence)
-    raw_value: ($) => /[^"\'\n\r][^\n\r]*/,
+    raw_value: ($) => /[^"'\n\r][^\n\r]*/,
     
     // Double-quoted strings with interpolation and escapes
     string_double: ($) => 
@@ -50,14 +50,11 @@ module.exports = grammar({
         '"'
       ),
     
-    // Single-quoted strings (no interpolation, limited escapes)
+    // Single-quoted strings (no interpolation, no escape sequences - literal)
     string_single: ($) =>
       seq(
         "'",
-        repeat(choice(
-          $.escape_sequence,
-          /[^'\\\\]+/
-        )),
+        repeat(/[^']+/),
         "'"
       ),
       

@@ -21,8 +21,8 @@
 (interpolation_short
   name: (identifier) @variable.special)
 
-; Escape sequences
-(escape_sequence) @constant.character.escape
+; Escape sequences (only in double-quoted strings)
+(string_double (escape_sequence) @constant.character.escape)
 
 ; Operators
 "=" @operator

@@ -28,19 +28,66 @@ module.exports = grammar({
     // Hidden rule for optional spacing
     _spacing: ($) => /[ \t]*/,
     
-    // Placeholder for value types - will be expanded in Phase 2+
-    _value: ($) => alias(token.immediate(/[^\n\r]*/), $.raw_value),
-
-
-    interpolated_variable: ($) =>
-      choice(
-        seq("$", $.identifier),
-        seq("${", $.identifier, "}"),
-        seq("${", $.identifier, ":-", $.identifier, "}"),
-        seq("$(", $.shell_command, ")"),
+    // Value types with precedence: strings > raw
+    _value: ($) => choice(
+      $.string_double,
+      $.string_single,
+      $.raw_value
+    ),
+    
+    // Raw value captures anything else (lowest precedence)
+    raw_value: ($) => /[^"\'\n\r][^\n\r]*/,
+    
+    // Double-quoted strings with interpolation and escapes
+    string_double: ($) => 
+      seq(
+        '"',
+        repeat(choice(
+          $.escape_sequence,
+          $.interpolation,
+          /[^"$\\\\]+/
+        )),
+        '"'
       ),
+    
+    // Single-quoted strings (no interpolation, limited escapes)
+    string_single: ($) =>
+      seq(
+        "'",
+        repeat(choice(
+          $.escape_sequence,
+          /[^'\\\\]+/
+        )),
+        "'"
+      ),
+      
+    // Interpolation patterns (only in double quotes)
+    interpolation: ($) => choice(
+      $.interpolation_default,
+      $.interpolation_simple,
+      $.interpolation_short
+    ),
+    
+    interpolation_default: ($) => 
+      prec.right(seq(
+        '${', 
+        field('name', $.identifier), 
+        token(seq(':', '-')), 
+        field('default', $.interpolation_value), 
+        '}'
+      )),
+      
+    interpolation_simple: ($) =>
+      seq('${', field('name', $.identifier), '}'),
+      
+    interpolation_short: ($) =>
+      seq('$', field('name', $.identifier)),
+    
+    // Values allowed in interpolation defaults
+    interpolation_value: ($) => /[^}]+/,
 
-    shell_command: ($) => /[^$()]+/,
+    // Escape sequences
+    escape_sequence: ($) => /\\./,
 
     identifier: ($) => choice(
       /[a-zA-Z_][a-zA-Z0-9_-]*/,
@@ -48,31 +95,9 @@ module.exports = grammar({
     ),
 
 
-    bool: ($) => choice("true", "false"),
-
-    integer: ($) => /\d+/,
-
-    string_interpolated: ($) =>
-      seq('"', repeat(choice($._interpolated_content, $.escape_sequence)), '"'),
-
-    _interpolated_content: ($) => choice(/[^"$\\]+/, $.interpolated_variable),
-
-    string_literal: ($) =>
-      seq("'", repeat(choice(/[^'\\]+/, $.escape_sequence)), "'"),
-
-    escape_sequence: ($) => token(seq("\\", /[nrtfb"'\$\\]/)),
-
-    url: ($) =>
-      token(
-        seq(
-          /https?:\/\//,
-          /[a-zA-Z0-9.-]+/,
-          optional(seq(":", /\d+/)),
-          optional(seq("/", /[^\s#]*/)),
-          optional(seq("#", /[^\s]*/)),
-        ),
-      ),
-
-    raw_value: ($) => token.immediate(prec(-1, /[^\n\r]+/)),
+    // Unused rules to be integrated in later phases
+    // bool: ($) => choice("true", "false"),
+    // integer: ($) => /\d+/,
+    // url: ($) => token(seq(/https?:\/\//, /[a-zA-Z0-9.-]+/, optional(seq(":", /\d+/)), optional(seq("/", /[^\s#]*/)), optional(seq("#", /[^\s]*/)))),
   },
 });

@@ -1,0 +1,82 @@
+==================
+simple interpolation
+==================
+var="Hello ${USER}"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (interpolation
+        (interpolation_simple
+          name: (identifier))))))
+
+==================
+interpolation with default
+==================
+var="User: ${USER:-nobody}"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (interpolation
+        (interpolation_default
+          name: (identifier)
+          default: (interpolation_value))))))
+
+==================
+multiple interpolations
+==================
+path="${HOME}/bin:${PATH}"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (interpolation
+        (interpolation_simple
+          name: (identifier)))
+      (interpolation
+        (interpolation_simple
+          name: (identifier))))))
+
+==================
+short form interpolation
+==================
+greeting="Hello $USER!"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (interpolation
+        (interpolation_short
+          name: (identifier))))))
+
+==================
+no interpolation in single quotes
+==================
+literal='${USER} is not expanded'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+mixed content with interpolation
+==================
+message="Welcome ${USER} to ${APP_NAME:-MyApp}!"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (interpolation
+        (interpolation_simple
+          name: (identifier)))
+      (interpolation
+        (interpolation_default
+          name: (identifier)
+          default: (interpolation_value))))))

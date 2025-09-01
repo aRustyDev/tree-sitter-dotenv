@@ -1,0 +1,10 @@
+==================
+minimal escape test
+==================
+test="a\"b"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (escape_sequence))))

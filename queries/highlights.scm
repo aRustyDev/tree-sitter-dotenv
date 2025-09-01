@@ -5,8 +5,27 @@
 (variable
   name: (identifier) @variable.parameter)
 
-; All values as strings
-(value) @string
+; String values
+(string_double) @string.quoted.double
+(string_single) @string.quoted.single
+(raw_value) @string.unquoted
+
+; Interpolation
+(interpolation_simple
+  name: (identifier) @variable.special)
+
+(interpolation_default
+  name: (identifier) @variable.special
+  default: (interpolation_value) @string)
+
+(interpolation_short
+  name: (identifier) @variable.special)
+
+; Escape sequences
+(escape_sequence) @constant.character.escape
 
 ; Operators
 "=" @operator
+"${" @punctuation.special
+"}" @punctuation.special
+"$" @punctuation.special

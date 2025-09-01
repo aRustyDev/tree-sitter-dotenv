@@ -5,22 +5,84 @@
     "fields": {}
   },
   {
-    "type": "interpolated_variable",
+    "type": "interpolation",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "interpolation_default",
           "named": true
         },
         {
-          "type": "shell_command",
+          "type": "interpolation_short",
+          "named": true
+        },
+        {
+          "type": "interpolation_simple",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "interpolation_default",
+    "named": true,
+    "fields": {
+      "default": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "interpolation_value",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "interpolation_short",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "interpolation_simple",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -37,6 +99,40 @@
         },
         {
           "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_double",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "interpolation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_single",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
           "named": true
         }
       ]
@@ -63,6 +159,14 @@
           {
             "type": "raw_value",
             "named": true
+          },
+          {
+            "type": "string_double",
+            "named": true
+          },
+          {
+            "type": "string_single",
+            "named": true
           }
         ]
       }
@@ -77,10 +181,6 @@
     "named": false
   },
   {
-    "type": "$(",
-    "named": false
-  },
-  {
     "type": "${",
     "named": false
   },
@@ -89,15 +189,7 @@
     "named": false
   },
   {
-    "type": ")",
-    "named": false
-  },
-  {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": ":-",
     "named": false
   },
   {
@@ -117,20 +209,12 @@
     "named": true
   },
   {
-    "type": "false",
-    "named": false
+    "type": "interpolation_value",
+    "named": true
   },
   {
     "type": "raw_value",
     "named": true
-  },
-  {
-    "type": "shell_command",
-    "named": true
-  },
-  {
-    "type": "true",
-    "named": false
   },
   {
     "type": "}",

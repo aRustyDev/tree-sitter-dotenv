@@ -1,0 +1,122 @@
+==================
+double quoted string
+==================
+key="simple string"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double)))
+
+==================
+single quoted string
+==================
+key='simple string'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+double quoted with escapes
+==================
+escaped="line1 line2 tab"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double)))
+
+==================
+double quoted with interpolation
+==================
+interp="Hello ${USER}"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (interpolation
+        (interpolation_simple
+          name: (identifier))))))
+
+==================
+double quoted with complex interpolation
+==================
+complex="${USER:-default}"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double
+      (interpolation
+        (interpolation_default
+          name: (identifier)
+          default: (interpolation_value))))))
+
+==================
+single quoted no interpolation
+==================
+literal='${USER} is literal'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+empty strings
+==================
+empty1=""
+empty2=''
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double))
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+strings with spaces
+==================
+spaces1="  leading and trailing  "
+spaces2='  leading and trailing  '
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double))
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+quoted strings with equals
+==================
+eq1="key=value"
+eq2='key=value'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double))
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+escaped quotes in strings
+==================
+quotes="She said Hello"
+quotes2='Its working'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double))
+  (variable
+    name: (identifier)
+    value: (string_single)))

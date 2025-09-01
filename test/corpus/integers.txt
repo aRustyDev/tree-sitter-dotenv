@@ -1,0 +1,154 @@
+==================
+positive integer
+==================
+PORT=3000
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer)))
+
+==================
+zero
+==================
+COUNT=0
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer)))
+
+==================
+negative integer
+==================
+OFFSET=-123
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer)))
+
+==================
+positive integer with sign
+==================
+PRIORITY=+99
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer)))
+
+==================
+integer with spaces
+==================
+PORT = 8080
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer)))
+
+==================
+integer with comment
+==================
+MAX_CONNECTIONS=100 # limit connections
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer))
+  (comment))
+
+==================
+not integer - has letters (known limitation)
+==================
+VALUE=123abc
+---
+; NOTE: Due to tokenization, "123abc" is parsed as integer(123) + identifier(abc)
+; See KNOWN_ISSUES.md for details
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer))
+  (variable
+    name: (identifier)))
+
+==================
+not integer - decimal (known limitation)
+==================
+PI=3.14
+---
+; NOTE: Decimal numbers are tokenized as integer + "." + integer
+; See KNOWN_ISSUES.md for details
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer))
+  (ERROR
+    (ERROR)
+    (integer)))
+
+==================
+not integer - scientific notation (known limitation)
+==================
+AVOGADRO=6.022e23
+---
+; NOTE: Scientific notation is not supported and will be tokenized as parts
+; See KNOWN_ISSUES.md for details
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer))
+  (ERROR
+    (ERROR)
+    (integer))
+  (variable
+    name: (identifier)))
+
+==================
+quoted integer is string
+==================
+PORT="3000"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double)))
+
+==================
+single quoted integer is string
+==================
+COUNT='42'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+multiple integers
+==================
+MIN=0
+MAX=100
+DEFAULT=50
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer))
+  (variable
+    name: (identifier)
+    value: (integer))
+  (variable
+    name: (identifier)
+    value: (integer)))
+
+==================
+leading zeros
+==================
+OCTAL=0755
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer)))

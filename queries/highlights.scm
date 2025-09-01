@@ -10,6 +10,10 @@
 (string_single) @string.quoted.single
 (raw_value) @string.unquoted
 
+; Primitive types
+(bool) @constant.builtin.boolean
+(integer) @constant.numeric.integer
+
 ; Interpolation
 (interpolation_simple
   name: (identifier) @variable.special)

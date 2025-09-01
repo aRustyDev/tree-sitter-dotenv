@@ -6,7 +6,7 @@ key=value
 (source_file
   (variable
     name: (identifier)
-    value: (value)))
+    value: (raw_value)))
 
 ==================
 empty value
@@ -25,7 +25,7 @@ key = value
 (source_file
   (variable
     name: (identifier)
-    value: (value)))
+    value: (raw_value)))
 
 ==================
 multiple variables
@@ -36,7 +36,7 @@ KEY2=value2
 (source_file
   (variable
     name: (identifier)
-    value: (value))
+    value: (raw_value))
   (variable
     name: (identifier)
-    value: (value)))
+    value: (raw_value)))

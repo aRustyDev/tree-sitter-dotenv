@@ -1,0 +1,103 @@
+==================
+boolean true
+==================
+key=true
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (bool)))
+
+==================
+boolean false
+==================
+key=false
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (bool)))
+
+==================
+boolean with spaces
+==================
+key = true
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (bool)))
+
+==================
+boolean with comment
+==================
+key=true # this is true
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (bool))
+  (comment))
+
+==================
+not boolean - uppercase
+==================
+key=TRUE
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+not boolean - partial match
+==================
+key=truthy
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+quoted boolean is string
+==================
+key="true"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double)))
+
+==================
+single quoted boolean is string
+==================
+key='false'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+multiple booleans on separate lines
+==================
+ENABLED=true
+DEBUG=false
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (bool))
+  (variable
+    name: (identifier)
+    value: (bool)))
+
+==================
+empty value not boolean
+==================
+EMPTY=
+---
+(source_file
+  (variable
+    name: (identifier)))

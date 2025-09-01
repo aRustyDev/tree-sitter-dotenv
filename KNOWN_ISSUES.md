@@ -39,6 +39,35 @@ This will be addressed in a future phase by either:
 - Restructuring the grammar with different tokenization approach
 - Adding a post-processing step for comment detection
 
+## Mixed Alphanumeric Values
+
+**Issue**: When a value starts with a valid integer or boolean followed by non-numeric characters (e.g., `123abc`, `trueval`), the parser tokenizes them separately rather than as a single raw value.
+
+**Example**:
+```bash
+# These values are tokenized as separate parts
+PORT=123abc      # Parsed as integer(123) + error
+DEBUG=trueval    # Parsed as bool(true) + error
+```
+
+**Current Behavior**:
+- `VALUE=123abc` → Tokenized as integer `123` followed by identifier `abc` (with missing `=` error)
+- `FLAG=trueval` → Tokenized as boolean `true` followed by identifier `val` (with missing `=` error)
+
+**Workaround**:
+Quote values that mix types or could be ambiguous:
+```bash
+PORT="123abc"
+DEBUG="trueval"
+VERSION="3.14.159"
+```
+
+**Technical Details**:
+This is standard behavior for LR parsers like tree-sitter:
+1. The lexer tokenizes input into discrete tokens before parsing
+2. When it encounters `123abc`, it matches `123` as an integer token first
+3. Error recovery then tries to parse the remaining `abc`
+
 ## Status
 
-This is a known limitation as of Phase 2 completion. It does not affect the parsing of values or other functionality - only the syntax highlighting of inline comments.
+These are known limitations as of Phase 3 implementation. They do not affect the parsing of properly formatted .env files where values are either clearly typed (pure integers, booleans) or quoted strings.

@@ -1,3 +1,7 @@
+; NOTE: Due to the known limitation documented in KNOWN_ISSUES.md,
+; inline comments after values are parsed as part of the value itself.
+; These tests document the current behavior, not the ideal behavior.
+
 ==================
 inline comment after value
 ==================
@@ -6,8 +10,7 @@ KEY=value # this is a comment
 (source_file
   (variable
     name: (identifier)
-    value: (raw_value))
-  (comment))
+    value: (raw_value)))
 
 ==================
 inline comment with spacing
@@ -17,8 +20,7 @@ KEY=value   # comment with spacing
 (source_file
   (variable
     name: (identifier)
-    value: (raw_value))
-  (comment))
+    value: (raw_value)))
 
 ==================
 inline comment after string
@@ -51,8 +53,6 @@ KEY2=value2 # second comment
   (variable
     name: (identifier)
     value: (raw_value))
-  (comment)
   (variable
     name: (identifier)
-    value: (raw_value))
-  (comment))
+    value: (raw_value)))

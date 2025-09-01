@@ -11,21 +11,17 @@ _UNDERSCORE=value
 
 (source_file
   (variable
-    (identifier)
-    (value
-      (raw_value)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (raw_value)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (raw_value)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (raw_value))))
+    name: (identifier)
+    value: (raw_value)))
 
 ================================================================================
 Hyphenated identifiers
@@ -40,18 +36,14 @@ my-custom-var=test
 
 (source_file
   (variable
-    (identifier)
-    (value
-      (bool)))
+    name: (identifier)
+    value: (bool))
   (variable
-    (identifier)
-    (value
-      (bool)))
+    name: (identifier)
+    value: (bool))
   (variable
-    (identifier)
-    (value
-      (raw_value)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (raw_value))))
+    name: (identifier)
+    value: (raw_value)))

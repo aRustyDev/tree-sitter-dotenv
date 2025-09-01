@@ -10,17 +10,14 @@ Namespace identifiers with @ syntax
 
 (source_file
   (variable
-    (identifier)
-    (value
-      (url)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (url)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (bool))))
+    name: (identifier)
+    value: (bool)))
 
 ================================================================================
 Mixed namespace and regular identifiers
@@ -35,18 +32,14 @@ auto-install-peers=true
 
 (source_file
   (variable
-    (identifier)
-    (value
-      (url)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (url)))
+    name: (identifier)
+    value: (raw_value))
   (variable
-    (identifier)
-    (value
-      (bool)))
+    name: (identifier)
+    value: (bool))
   (variable
-    (identifier)
-    (value
-      (bool))))
+    name: (identifier)
+    value: (bool)))

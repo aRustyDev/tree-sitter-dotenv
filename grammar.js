@@ -19,23 +19,23 @@ module.exports = grammar({
     variable: ($) =>
       seq(
         field("name", $.identifier),
-        optional($._spacing),  // Allow "key = value"
-        "=",
-        optional($._spacing),  // Allow "key= value" or "key = value"
+        token("="),
         field("value", optional($._value))
       ),
     
     // Hidden rule for optional spacing
     _spacing: ($) => /[ \t]*/,
     
-    // Value types with precedence: strings > raw
+    // Value types with precedence: strings > bool > integer > raw
     _value: ($) => choice(
       $.string_double,
       $.string_single,
+      $.bool,
+      $.integer,
       $.raw_value
     ),
     
-    // Raw value captures anything else (lowest precedence)
+    // Raw value captures anything else
     raw_value: ($) => /[^"'\n\r][^\n\r]*/,
     
     // Double-quoted strings with interpolation and escapes
@@ -91,10 +91,15 @@ module.exports = grammar({
       seq('@', /[a-zA-Z0-9_-]+/, ':', /[a-zA-Z0-9_-]+/)
     ),
 
+    // Primitive types
+    bool: ($) => token(prec(2, choice(
+      'true',
+      'false'
+    ))),
+
+    integer: ($) => token(prec(1, /[+-]?\d+/)),
 
     // Unused rules to be integrated in later phases
-    // bool: ($) => choice("true", "false"),
-    // integer: ($) => /\d+/,
     // url: ($) => token(seq(/https?:\/\//, /[a-zA-Z0-9.-]+/, optional(seq(":", /\d+/)), optional(seq("/", /[^\s#]*/)), optional(seq("#", /[^\s]*/)))),
   },
 });

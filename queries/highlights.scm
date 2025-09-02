@@ -13,7 +13,7 @@
 ; String values
 (string_double) @string.quoted.double
 (string_single) @string.quoted.single
-(raw_value) @string.unquoted
+; (raw_value) @string.unquoted  ; Commented out - let raw values have no highlight
 
 ; URLs and URIs
 (url) @string.special.url

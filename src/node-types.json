@@ -151,6 +151,10 @@
             "named": true
           },
           {
+            "type": "float",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -216,6 +220,10 @@
   },
   {
     "type": "escape_sequence",
+    "named": true
+  },
+  {
+    "type": "float",
     "named": true
   },
   {

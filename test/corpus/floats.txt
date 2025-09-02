@@ -1,0 +1,147 @@
+==================
+basic decimal
+==================
+PI=3.14
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+decimal without leading digit
+==================
+HALF=.5
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+decimal without trailing digit
+==================
+WHOLE=42.
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+negative decimal
+==================
+NEGATIVE=-2.718
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+positive decimal with sign
+==================
+POSITIVE=+1.5
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+scientific notation lowercase
+==================
+SMALL=1.23e-4
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+scientific notation uppercase
+==================
+LARGE=6.022E23
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+scientific notation with positive exponent
+==================
+POSITIVE_EXP=2.5e+3
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+scientific notation integer base
+==================
+AVOGADRO=6e23
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+zero decimal
+==================
+ZERO=0.0
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+multiple decimals on separate lines
+==================
+A=1.1
+B=2.2
+C=3.3
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float))
+  (variable
+    name: (identifier)
+    value: (float))
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+float with spaces
+==================
+SPACED = 3.14
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (float)))
+
+==================
+quoted decimal is string
+==================
+QUOTED="3.14"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double)))
+
+==================
+single quoted decimal is string
+==================
+SINGLE_QUOTED='3.14'
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_single)))

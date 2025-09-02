@@ -13,6 +13,7 @@
 ; Primitive types
 (bool) @constant.builtin.boolean
 (integer) @constant.numeric.integer
+(float) @constant.numeric.float
 
 ; URLs and URIs
 (url) @string.special.url

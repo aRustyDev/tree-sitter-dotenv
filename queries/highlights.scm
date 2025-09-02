@@ -3,38 +3,38 @@
 
 ; Variable names (keys)
 (variable
-  name: (identifier) @variable.parameter)
+  name: (identifier) @variable)
 
 ; Primitive types (higher precedence)
-(bool) @constant.builtin.boolean
-(float) @constant.numeric.float
-(integer) @constant.numeric.integer
+(bool) @boolean
+(float) @number
+(integer) @number
 
 ; String values
-(string_double) @string.quoted.double
-(string_single) @string.quoted.single
-; (raw_value) @string.unquoted  ; Commented out - let raw values have no highlight
+(string_double) @string
+(string_single) @string
+; (raw_value) @string  ; Commented out - let raw values have no highlight
 
 ; URLs and URIs
-(url) @string.special.url
-(uri) @string.special.url
+(url) @string.special
+(uri) @string.special
 
 ; Interpolation
 (interpolation_simple
-  name: (identifier) @variable.special)
+  name: (identifier) @variable)
 
 (interpolation_default
-  name: (identifier) @variable.special
+  name: (identifier) @variable
   default: (interpolation_value) @string)
 
 (interpolation_short
-  name: (identifier) @variable.special)
+  name: (identifier) @variable)
 
 ; Escape sequences (only in double-quoted strings)
-(string_double (escape_sequence) @constant.character.escape)
+(string_double (escape_sequence) @string.escape)
 
 ; Operators
 "=" @operator
-"${" @punctuation.special
-"}" @punctuation.special
+"${" @punctuation.bracket
+"}" @punctuation.bracket
 "$" @punctuation.special

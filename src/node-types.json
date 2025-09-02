@@ -1,5 +1,10 @@
 [
   {
+    "type": "float",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "identifier",
     "named": true,
     "fields": {}
@@ -220,10 +225,6 @@
   },
   {
     "type": "escape_sequence",
-    "named": true
-  },
-  {
-    "type": "float",
     "named": true
   },
   {

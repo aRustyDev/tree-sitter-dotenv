@@ -1,0 +1,188 @@
+==================
+empty value
+==================
+KEY=
+---
+(source_file
+  (variable
+    name: (identifier)))
+
+==================
+empty value with comment
+==================
+KEY= # this is empty
+---
+(source_file
+  (variable
+    name: (identifier))
+  (comment))
+
+==================
+empty value with space
+==================
+KEY= 
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+spaces around equals
+==================
+KEY = value
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+spaces before value
+==================
+KEY=  value
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+special characters backslashes
+==================
+PATH=C:\Users\Documents\file.txt
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+special characters at symbols
+==================
+EMAIL=user@example.com
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+special characters hash in value
+==================
+COLOR=#FF5500
+---
+(source_file
+  (variable
+    name: (identifier))
+  (comment))
+
+==================
+very long value
+==================
+LONG=This is a very long value that might span multiple visual lines in an editor but is still one logical line in the file and should be parsed as a single raw_value node without any issues
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+unicode characters
+==================
+GREETING=Hello 世界 🌍
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+tabs in value
+==================
+TABBED=value	with	tabs
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+value with equals sign
+==================
+EQUATION=a=b+c
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+multiple equals signs
+==================
+MULTI_EQUALS=key=value=something
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+quoted empty string
+==================
+EMPTY_STRING=""
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double)))
+
+==================
+single quoted empty string
+==================
+EMPTY_SINGLE=''
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_single)))
+
+==================
+key with dots
+==================
+app.name=MyApp
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+key with dashes
+==================
+app-name=MyApp
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+key with underscores and numbers
+==================
+API_KEY_123=secret
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+mixed case key
+==================
+MyVariable=value
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))

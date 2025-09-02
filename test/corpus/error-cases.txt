@@ -1,0 +1,91 @@
+==================
+multiple values error
+==================
+KEY=value1 value2 value3
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+boolean with extra text
+==================
+ENABLED=true some extra text
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (bool))
+  (ERROR
+    (identifier)))
+
+==================
+integer with extra text
+==================
+PORT=8080 with comment
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (integer))
+  (ERROR
+    (identifier)))
+
+==================
+url with extra text
+==================
+API=https://example.com extra stuff
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (url))
+  (ERROR
+    (identifier)))
+
+==================
+missing equals sign
+==================
+KEY VALUE
+---
+(source_file
+  (ERROR
+    (identifier)))
+
+==================
+trailing comma
+==================
+VALUE=something,
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+multiple equals on same line
+==================
+KEY1=value1 KEY2=value2
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+just equals sign
+==================
+=
+---
+(source_file
+  (ERROR))
+
+==================
+just key no newline
+==================
+KEY
+---
+(source_file
+  (ERROR
+    (identifier)))

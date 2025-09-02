@@ -89,7 +89,7 @@ module.exports = grammar({
     escape_sequence: ($) => /\\./,
 
     identifier: ($) => choice(
-      /[a-zA-Z_][a-zA-Z0-9_-]*/,
+      /[a-zA-Z_][a-zA-Z0-9_.-]*/,
       seq('@', /[a-zA-Z0-9_-]+/, ':', /[a-zA-Z0-9_-]+/)
     ),
 

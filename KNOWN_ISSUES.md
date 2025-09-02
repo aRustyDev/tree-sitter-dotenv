@@ -138,6 +138,33 @@ CONFIG='["a","b","c"]'
 
 **Recommendation**: Applications should handle array parsing from raw values according to their specific needs.
 
+## Float Highlighting in Zed
+
+**Issue**: Float values are parsed correctly but do not highlight in Zed editor.
+
+**Example**:
+```bash
+# These parse as (float) nodes but show as white instead of orange
+PI=3.14
+HALF=.5  
+SCIENTIFIC=1.23e-4
+```
+
+**Current Behavior**:
+- Floats are correctly parsed as `(float)` nodes in the AST
+- The highlight rule `(float) @number` is present
+- Integers and booleans highlight correctly as orange
+- Floats show as white (no highlighting applied)
+
+**Technical Details**:
+This appears to be a Zed-specific issue where float tokens are not being recognized by the syntax highlighter, despite:
+1. Correct parsing in tree-sitter CLI
+2. Using Zed-compatible capture names (`@number`)
+3. Setting high precedence (10) for float tokens
+4. Simplifying regex patterns
+
+**Workaround**: None currently available. Floats will parse correctly but won't be visually distinguished.
+
 ## Status
 
 These are known limitations as of Phase 6 implementation. They do not affect the parsing of properly formatted .env files where values are either clearly typed (pure integers, booleans, floats) or quoted strings.

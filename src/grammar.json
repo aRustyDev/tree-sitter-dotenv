@@ -356,7 +356,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PREC",
-        "value": 2,
+        "value": 10,
         "content": {
           "type": "CHOICE",
           "members": [

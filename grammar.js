@@ -103,7 +103,7 @@ module.exports = grammar({
     integer: ($) => token(prec(1, /[+-]?\d+/)),
 
     // Float/decimal numbers with scientific notation
-    float: ($) => token(prec(2, choice(
+    float: ($) => token(prec(10, choice(
       // Standard decimal notation: 3.14, 0.5, -2.718, .5, 42.
       seq(
         optional(choice('+', '-')),

@@ -26,12 +26,14 @@ module.exports = grammar({
     // Hidden rule for optional spacing
     _spacing: ($) => /[ \t]*/,
     
-    // Value types with precedence: strings > bool > integer > raw
+    // Value types with precedence: strings > bool > integer > uri > url > raw
     _value: ($) => choice(
       $.string_double,
       $.string_single,
       $.bool,
       $.integer,
+      $.uri,
+      $.url,
       $.raw_value
     ),
     
@@ -99,7 +101,56 @@ module.exports = grammar({
 
     integer: ($) => token(prec(1, /[+-]?\d+/)),
 
-    // Unused rules to be integrated in later phases
-    // url: ($) => token(seq(/https?:\/\//, /[a-zA-Z0-9.-]+/, optional(seq(":", /\d+/)), optional(seq("/", /[^\s#]*/)), optional(seq("#", /[^\s]*/)))),
+    // Simple URL for common http(s) cases
+    url: ($) => token(prec(3, seq(
+      /https?:\/\//,
+      // Optional userinfo (user:pass@)
+      optional(seq(/[a-zA-Z0-9._~!$&'()*+,;=:-]+/, '@')),
+      // Host
+      /[a-zA-Z0-9.-]+/,
+      // Optional port
+      optional(seq(':', /\d+/)),
+      // Optional path
+      optional(/\/[^\s#]*/),
+      // Optional fragment
+      optional(seq('#', /[^\s]*/))
+    ))),
+
+    // Generic URI for other schemes
+    uri: ($) => token(prec(2, seq(
+      choice(
+        // Web protocols
+        /https?:\/\//,
+        /wss?:\/\//,
+        // Database protocols
+        /postgres(ql)?:\/\//,
+        /mysql:\/\//,
+        /mongodb:\/\//,
+        /redis:\/\//,
+        seq('jdbc:', choice('mysql', 'postgresql', 'sqlite'), '://'),
+        // File protocols
+        /file:\/\//,
+        /ftps?:\/\//,
+        /sftp:\/\//,
+        // VCS protocols
+        /git(\+https?|\+ssh)?:\/\//,
+        /ssh:\/\//,
+        // Messaging
+        /amqps?:\/\//,
+        /mqtt:\/\//,
+        /kafka:\/\//,
+        // Cloud storage
+        /s3:\/\//,
+        /gs:\/\//,
+        /azure:\/\//,
+        // Other schemes (without ://)
+        /mailto:/,
+        /data:/,
+        /ldaps?:\/\//,
+        /urn:/
+      ),
+      // Rest of URI
+      /[^\s]+/
+    ))),
   },
 });

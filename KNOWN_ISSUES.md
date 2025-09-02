@@ -11,11 +11,18 @@ KEY=value
 
 # This has limited support - comment is parsed as part of value
 KEY=value # this comment becomes part of the value
+
+# Test scenario from phase1-verification.env line 29
+VALUE=something # This is an inline comment
+# Result: Comment appears green (part of raw_value) instead of grey
 ```
 
 **Current Behavior**:
 - `KEY=value # comment` → The entire string "value # comment" is parsed as the value
 - Comments must be on their own line to be properly highlighted
+- This behavior differs between typed values and raw values:
+  - `BOOL=true # comment` → Comment is parsed separately (appears grey)
+  - `RAW=text # comment` → Comment is part of raw_value (appears green/white)
 
 **Workaround**:
 Place comments on their own lines:
@@ -33,6 +40,19 @@ This limitation exists because:
 2. The `#` character is valid in unquoted values
 3. Disambiguating between `#` as part of value vs start of comment requires context
 
+**Test Cases for Resolution**:
+When implementing the fix, ensure these scenarios work correctly:
+```bash
+# From phase1-verification.env line 29
+VALUE=something # This is an inline comment
+# Expected: "something" is white (raw_value), "# This is an inline comment" is grey (comment)
+
+# From phase2-verification.env line 75
+ALSO_RAW=true  # This is raw_value, not string
+# Current: Comment is grey (correct behavior with typed values)
+# This should continue to work after the fix
+```
+
 **Future Resolution**:
 This will be addressed in a future phase by either:
 - Implementing an external scanner for more complex parsing logic
@@ -48,11 +68,17 @@ This will be addressed in a future phase by either:
 # These values are tokenized as separate parts
 PORT=123abc      # Parsed as integer(123) + error
 DEBUG=trueval    # Parsed as bool(true) + error
+NOT_INT=123abc   # Key "NOT_INT" may not highlight correctly
+
+# Test scenarios from phase3-test.env
+NOT_BOOL=trueval  # Line 17: "NOT_BOOL" highlights correctly (red)
+NOT_INT=123abc    # Line 18: "NOT_INT" highlights incorrectly (white instead of red)
 ```
 
 **Current Behavior**:
 - `VALUE=123abc` → Tokenized as integer `123` followed by identifier `abc` (with missing `=` error)
 - `FLAG=trueval` → Tokenized as boolean `true` followed by identifier `val` (with missing `=` error)
+- **Key Parsing Bug**: When a value starts with an integer/boolean followed by other characters, the key may lose proper highlighting. For example, in `NOT_INT=123abc`, the key "NOT_INT" appears white instead of the expected key color
 
 **Workaround**:
 Quote values that mix types or could be ambiguous:
@@ -67,6 +93,23 @@ This is standard behavior for LR parsers like tree-sitter:
 1. The lexer tokenizes input into discrete tokens before parsing
 2. When it encounters `123abc`, it matches `123` as an integer token first
 3. Error recovery then tries to parse the remaining `abc`
+4. The key highlighting bug appears to be inconsistent - it affects integer+text but not boolean+text
+
+**Test Cases for Resolution**:
+```bash
+# Both should highlight keys (NOT_BOOL, NOT_INT) in red
+NOT_BOOL=trueval   # Currently works: key is red
+NOT_INT=123abc     # Currently broken: key is white
+
+# After fix, both keys should be red and values should parse as:
+# - NOT_BOOL: bool(true) + error(val)
+# - NOT_INT: integer(123) + error(abc)
+```
+
+## Resolution Timeline
+
+- **Mixed Alphanumeric Values (Key Highlighting)**: Planned for Phase 4-5 (Error handling and edge case improvements)
+- **Inline Comments**: Planned for a future phase with external scanner implementation (not yet scheduled)
 
 ## Status
 

@@ -11,10 +11,10 @@ Namespace identifiers with @ syntax
 (source_file
   (variable
     name: (identifier)
-    value: (raw_value))
+    value: (url))
   (variable
     name: (identifier)
-    value: (raw_value))
+    value: (url))
   (variable
     name: (identifier)
     value: (bool)))
@@ -33,10 +33,10 @@ auto-install-peers=true
 (source_file
   (variable
     name: (identifier)
-    value: (raw_value))
+    value: (url))
   (variable
     name: (identifier)
-    value: (raw_value))
+    value: (url))
   (variable
     name: (identifier)
     value: (bool))

@@ -14,6 +14,10 @@
 (bool) @constant.builtin.boolean
 (integer) @constant.numeric.integer
 
+; URLs and URIs
+(url) @string.special.url
+(uri) @string.special.url
+
 ; Interpolation
 (interpolation_simple
   name: (identifier) @variable.special)

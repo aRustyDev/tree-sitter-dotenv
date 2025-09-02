@@ -1,0 +1,219 @@
+==================
+simple http url
+==================
+URL=http://example.com
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (url)))
+
+==================
+https url with path
+==================
+API_URL=https://api.example.com/v1/users
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (url)))
+
+==================
+url with port
+==================
+SERVICE_URL=http://localhost:8080
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (url)))
+
+==================
+url with query parameters
+==================
+SEARCH_URL=https://example.com/search?q=hello&page=1
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (url)))
+
+==================
+url with fragment
+==================
+DOC_URL=https://docs.example.com/guide#section-2
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (url)))
+
+==================
+complex url
+==================
+FULL_URL=https://user:pass@api.example.com:8443/v2/resource?filter=active&sort=date#results
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (url)))
+
+==================
+database uri postgresql
+==================
+DATABASE_URL=postgresql://user:password@localhost:5432/mydb
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+database uri mysql
+==================
+MYSQL_URL=mysql://root:secret@127.0.0.1:3306/database
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+mongodb uri
+==================
+MONGO_URI=mongodb://localhost:27017/myapp
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+redis uri
+==================
+REDIS_URL=redis://localhost:6379/0
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+jdbc uri
+==================
+JDBC_URL=jdbc:mysql://localhost:3306/testdb
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+file uri
+==================
+CONFIG_PATH=file:///home/user/config.yml
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+ftp uri
+==================
+FTP_SERVER=ftp://files.example.com/public
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+git ssh uri
+==================
+REPO_URL=git+ssh://git@github.com/user/repo.git
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+websocket uri
+==================
+WS_ENDPOINT=ws://localhost:8080/socket
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+secure websocket uri
+==================
+WSS_ENDPOINT=wss://secure.example.com/ws
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+mailto uri
+==================
+SUPPORT_EMAIL=mailto:support@example.com
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+data uri
+==================
+INLINE_IMAGE=data:image/png;base64,iVBORw0KGgoAAAANS
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+s3 uri
+==================
+BUCKET=s3://my-bucket/path/to/file.txt
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (uri)))
+
+==================
+not a url - no scheme
+==================
+NOT_URL=example.com/path
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+not a url - missing slashes
+==================
+BAD_URL=http:example.com
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (raw_value)))
+
+==================
+url in quotes
+==================
+QUOTED_URL="https://example.com"
+---
+(source_file
+  (variable
+    name: (identifier)
+    value: (string_double)))

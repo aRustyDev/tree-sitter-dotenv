@@ -106,6 +106,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "uri"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "url"
+        },
+        {
+          "type": "SYMBOL",
           "name": "raw_value"
         }
       ]
@@ -337,6 +345,236 @@
         "content": {
           "type": "PATTERN",
           "value": "[+-]?\\d+"
+        }
+      }
+    },
+    "url": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 3,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "https?:\\/\\/"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[a-zA-Z0-9._~!$&'()*+,;=:-]+"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "@"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "PATTERN",
+              "value": "[a-zA-Z0-9.-]+"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ":"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "\\d+"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "\\/[^\\s#]*"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "#"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[^\\s]*"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "uri": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "https?:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "wss?:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "postgres(ql)?:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "mysql:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "mongodb:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "redis:\\/\\/"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "jdbc:"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "mysql"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "postgresql"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "sqlite"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "://"
+                    }
+                  ]
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "file:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "ftps?:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "sftp:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "git(\\+https?|\\+ssh)?:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "ssh:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "amqps?:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "mqtt:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "kafka:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "s3:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "gs:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "azure:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "mailto:"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "data:"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "ldaps?:\\/\\/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "urn:"
+                }
+              ]
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\s]+"
+            }
+          ]
         }
       }
     }

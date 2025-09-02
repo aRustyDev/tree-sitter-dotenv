@@ -165,6 +165,14 @@
           {
             "type": "string_single",
             "named": true
+          },
+          {
+            "type": "uri",
+            "named": true
+          },
+          {
+            "type": "url",
+            "named": true
           }
         ]
       }
@@ -220,6 +228,14 @@
   },
   {
     "type": "raw_value",
+    "named": true
+  },
+  {
+    "type": "uri",
+    "named": true
+  },
+  {
+    "type": "url",
     "named": true
   },
   {

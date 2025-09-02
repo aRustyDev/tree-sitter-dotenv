@@ -111,6 +111,33 @@ NOT_INT=123abc     # Currently broken: key is white
 - **Mixed Alphanumeric Values (Key Highlighting)**: Planned for Phase 4-5 (Error handling and edge case improvements)
 - **Inline Comments**: Planned for a future phase with external scanner implementation (not yet scheduled)
 
+## Array Support
+
+**Status**: Not implemented (by design)
+
+**Rationale**: .env files don't have a standardized array syntax. Different frameworks handle arrays differently:
+- Comma-separated: `HOSTS=localhost,example.com`
+- JSON format: `CONFIG=["a","b","c"]`
+- Space-separated: `ALLOWED_IPS=192.168.1.1 10.0.0.1`
+- Indexed keys: `HOST[0]=localhost`
+
+**Current Behavior**:
+All array-like values are parsed as raw values (white) or strings (green if quoted). This allows applications to parse arrays according to their own conventions.
+
+**Examples**:
+```bash
+# All parsed as raw_value (white)
+PORTS=80,443
+HOSTS=localhost,example.com
+NAMES=John,Jane Smith
+
+# Parsed as string (green)
+HOSTS="localhost,example.com"
+CONFIG='["a","b","c"]'
+```
+
+**Recommendation**: Applications should handle array parsing from raw values according to their specific needs.
+
 ## Status
 
-These are known limitations as of Phase 3 implementation. They do not affect the parsing of properly formatted .env files where values are either clearly typed (pure integers, booleans) or quoted strings.
+These are known limitations as of Phase 6 implementation. They do not affect the parsing of properly formatted .env files where values are either clearly typed (pure integers, booleans, floats) or quoted strings.

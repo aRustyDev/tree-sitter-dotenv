@@ -5,15 +5,15 @@
 (variable
   name: (identifier) @variable.parameter)
 
+; Primitive types (higher precedence)
+(bool) @constant.builtin.boolean
+(float) @constant.numeric.float
+(integer) @constant.numeric.integer
+
 ; String values
 (string_double) @string.quoted.double
 (string_single) @string.quoted.single
 (raw_value) @string.unquoted
-
-; Primitive types
-(bool) @constant.builtin.boolean
-(integer) @constant.numeric.integer
-(float) @constant.numeric.float
 
 ; URLs and URIs
 (url) @string.special.url

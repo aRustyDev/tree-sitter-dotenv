@@ -103,12 +103,24 @@ module.exports = grammar({
     integer: ($) => token(prec(1, /[+-]?\d+/)),
 
     // Float/decimal numbers with scientific notation
-    float: ($) => prec(10, token(choice(
+    float: ($) => token(prec(10, choice(
       // Standard decimal notation: 3.14, 0.5, -2.718, .5, 42.
-      /[+-]?\d+\.\d*/,     // 3.14 or 42.
-      /[+-]?\d*\.\d+/,     // .5 or 0.5
+      seq(
+        optional(choice('+', '-')),
+        choice(
+          seq(/\d+/, '.', /\d*/),  // 3.14 or 42.
+          seq(/\d*/, '.', /\d+/)   // .5 or 0.5
+        )
+      ),
       // Scientific notation: 1.23e-4, 6.022E23, 1e10
-      /[+-]?\d+(\.\d+)?[eE][+-]?\d+/
+      seq(
+        optional(choice('+', '-')),
+        /\d+/,
+        optional(seq('.', /\d+/)),
+        /[eE]/,
+        optional(choice('+', '-')),
+        /\d+/
+      )
     ))),
 
     // Simple URL for common http(s) cases
@@ -121,9 +133,9 @@ module.exports = grammar({
       // Optional port
       optional(seq(':', /\d+/)),
       // Optional path
-      optional(/\/[^\s#]*/),
+      optional(/\/[^\s#,]*/),
       // Optional fragment
-      optional(seq('#', /[^\s]*/))
+      optional(seq('#', /[^\s,]*/))
     ))),
 
     // Generic URI for other schemes
@@ -159,8 +171,8 @@ module.exports = grammar({
         /ldaps?:\/\//,
         /urn:/
       ),
-      // Rest of URI
-      /[^\s]+/
+      // Rest of URI (exclude comma for list contexts)
+      /[^\s,]+/
     ))),
   },
 });
